@@ -1,0 +1,162 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+
+    <main id="main">
+      
+  <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>READING COMPREHENSION</h2>
+          
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+           
+          <p>Allow our AI assistant to help you in reading comprehension!</p>
+          
+        </div>
+
+      </div>
+    </section>
+
+      <!-- ======= About Section ======= -->
+      <section id="about" class="about">
+        
+
+
+        <div class="container shadow-lg">
+          <form method="post">
+            {% csrf_token %}
+        
+          <div class="row">
+          <!-- <div class="border-div col-lg-12">
+              
+              <button type="button" class="btn tab-btn border-0" disabled>Modes:</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Standard</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Fluency</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Formal</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Simple</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Creative</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Expand</button>
+              <button type="button" class="btn tab-btn hvr-underline-from-center">Shorten</button> Synonyms:</button>
+              <input type="range" class="form-range" id="customRange1"><i class="bi bi-gem hira"></i>
+          </div> -->
+          <div class="col-lg-6 order-first order-lg-1 content m-0 p-0" >
+              
+             
+            <textarea id="id_textarea" class="textarea-1 p-2" name= "text" placeholder="Write the passage here.">{{text}}</textarea>
+              
+              
+          
+              
+    
+
+          </div>
+ 
+
+          <div class="text-center col-lg-6 order-1 order-lg-2 m-0 p-0 bordrbttm  " >
+            <div ><button  id="add-textbox" type="button" class="button_end" >Add Questions</button></div>
+
+              <div class="textbox-style" id="textboxes"></div>
+          <div>You can add maximum 5 questions only.</div>
+          </div>
+       
+
+    
+
+</div>
+
+     
+</section>
+
+  <div class="container shadow-lg">
+  
+        
+  
+    <div  style="margin-bottom: 50px; ">
+      
+      <div class="text-center" >
+      <button onclick="addPreloader()" type="submit"  class="button_end" >Get Answers</button>
+      </div>
+      <div>
+      
+      <textarea id="id_textarea" class="textarea-1 p-2" placeholder="You will get your answers here..">{{answers}}</textarea>
+     
+    
+    
+    </div>
+  </div>
+</form>
+  </div>
+    
+
+
+</main>
+
+     
+   
+
+<script>
+  var textboxNumber = 1;
+  
+document.getElementById("add-textbox").addEventListener("click",
+    
+
+function(){
+    if(textboxNumber <= 5){
+  
+    var newTextbox = document.createElement("input");
+    
+    newTextbox.type = "text";
+    newTextbox.placeholder = "Write Question No" + textboxNumber;
+    newTextbox.name = "textbox" + textboxNumber;
+    
+
+    document.getElementById("textboxes").appendChild(newTextbox);
+    newTextbox.classList.add("textbox-style");
+    
+    textboxNumber++ ;
+    }
+});
+
+</script>
+
+
+<script>
+    
+    function addPreloader() {
+      var preloader = document.createElement("div");
+      preloader.id = "preloader";
+      document.body.appendChild(preloader);
+      window.location.reload();
+    }
+  
+    window.addEventListener("load", function() {
+      var preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.parentNode.removeChild(preloader);
+      }
+    });
+  
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+

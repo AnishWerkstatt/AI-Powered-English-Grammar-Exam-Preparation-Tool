@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section class="breadcrumbs">
+        <div class="container">
+  
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>PARAPHRASE</h2>
+            
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+           
+            <p>Paraphrase any text!</p>
+            
+          </div>
+  
+        </div>
+      </section>
+  <section id="about" class="about">
+   
+    <form method="post">
+        {% csrf_token %}
+    
+        
+        <div class="container shadow-lg">
+        <div class="row">
+          <div class="border-div col-lg-12">              
+            <button type="button" class="btn tab-btn border-0" disabled>Modes:</button>
+            <!-- <button type="button" class="btn tab-btn hvr-underline-from-center">Standard</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Fluency</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Formal</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Simple</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Creative</button> -->
+            <button type="button" class="btn tab-btn hvr-underline-from-center ">Standard</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Advance<sup class="super_script">PRO</sup></button>
+            
+            <button type="button" class="btn tab-btn border-0" disabled>Frequency:</button>
+            <input type="range" class="form-range" id="customRange1" min="0" oninput="updateValue()"
+            {% if not user.is_authenticated %}
+              max="50"
+              {% else %} max="200" 
+              {% endif %}>
+            <i class="bi bi-gem hira"></i>
+            <span class="super_script" id="pro-label" style="display:none;">(PRO USER)</span>
+            <span id="rangeValue"></span><i class="bi bi-gem hira"></i>
+        </div>
+        
+          <div class="col-lg-6 content m-0 p-0" >
+              <textarea class="textarea-1 p-2" name= "text" placeholder="Input here QuillBot will rewrite your text. Start by writing or pasting something here and then press the Paraphrase button.">{{text}}</textarea>
+              
+              <div class="col-lg-6 col-md-5 col-sm-12 parbtn-div">
+                <button onclick="addPreloader()" class="btn bt-sm me-4 parbtn"style="">Paraphrase</button>
+              </div>
+          </div>
+          <div class="col-lg-6 m-0 p-2 bordrbttm" >
+            <textarea class="textarea-2 m-0 p-0" name= "output" placeholder="Output here QuillBot will rewrite your text. Start by writing or pasting something here and then press the Paraphrase button.">{{text_paraphrase}}</textarea>
+          </div>
+
+        </div>
+
+      </div>
+</form>
+      </section>
+ 
+    </main>
+   
+    
+    
+
+<script>
+  function addPreloader() {
+    var preloader = document.createElement("div");
+    preloader.id = "preloader";
+    document.body.appendChild(preloader);
+    window.location.reload();
+  }
+
+  window.addEventListener("load", function() {
+    var preloader = document.getElementById("preloader");
+    if (preloader) {
+      preloader.parentNode.removeChild(preloader);
+    }
+  });
+</script>
+
+
+<script>
+  function updateValue() {
+    var range = document.getElementById("customRange1");
+    var span = document.getElementById("rangeValue");
+    span.innerHTML = range.value;
+  }
+ 
+</script>
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var range = document.getElementById("customRange1");
+  var label = document.getElementById("pro-label");
+
+  range.addEventListener("input", function() {
+    
+    if (range.value >= 50) {
+      label.style.display = "inline";
+    } else {
+      label.style.display = "none";
+    }
+  });
+});
+</script>
+
+{% endblock %}

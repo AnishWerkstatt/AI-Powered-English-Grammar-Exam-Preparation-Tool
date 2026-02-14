@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+
+    <main id="main">
+      
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>FILL IN THE BLANKS</h2>
+          {% if attempts_left %}
+          <p>You have {{ attempts_left }} attempts left to access this page.</p>
+            {% endif %}
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+           
+          <p>Fill the blanks with appropriate words!</p>
+          
+        </div>
+
+      </div>
+    </section>
+
+
+
+      <!-- ======= About Section ======= -->
+   
+  <section id="about" class="about">
+    <form method="post">
+        {% csrf_token %}
+    
+
+        <div class="container shadow-lg">
+        <div class="row">
+          <div class="border-div col-lg-12">              
+            <button type="button" class="btn tab-btn border-0" disabled>Modes:</button>
+            <!-- <button type="button" class="btn tab-btn hvr-underline-from-center">Standard</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Fluency</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Formal</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Simple</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Creative</button> -->
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Standard</button>
+            <button type="button" class="btn tab-btn hvr-underline-from-center">Advance<sup class="super_script">PRO</sup></button>
+            <button type="button" class="btn tab-btn border-0" disabled>Words Range:</button>
+            <input type="range" class="form-range" id="customRange1"><i class="bi bi-gem hira"></i>
+        </div>
+          
+          <div class="col-lg-6 content m-0 p-0" >
+              <textarea class="textarea-1 p-2 m-0" name= "text" placeholder="Write the sentence with a blank example: He is a ____ boy.">{{text}}</textarea>
+              <div class="col-lg-6 col-md-7 col-sm-12 icodiv">
+                  
+              </div>
+              <div class="col-lg-6 col-md-5 col-sm-12 parbtn-div">
+                <button id="loadPage" onclick="addPreloader()" class="btn bt-sm me-4 parbtn"style="">Fill Blank</button>
+              </div>
+          </div>
+          <div class="col-lg-6 m-0 p-0 bordrbttm " >
+            
+              <textarea class="textarea-1 p-2 " name= "output" placeholder="Output will be displayed here..">{{blank_answers}}</textarea>
+          </div>
+
+        </div>
+      </div>
+</form>
+      </section>
+ 
+ 
+
+    </main>
+
+    <!-- <script>
+      document.querySelectorAll('.textarea-1')[1].scrollIntoView()
+      </script>       
+    
+   -->
+
+   <script>
+    function addPreloader() {
+      var preloader = document.createElement("div");
+      preloader.id = "preloader";
+      document.body.appendChild(preloader);
+      window.location.reload();
+    }
+  
+    window.addEventListener("load", function() {
+      var preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.parentNode.removeChild(preloader);
+      }
+    });
+  </script>
+
+
+<script>
+  document.getElementById("loadPage").addEventListener("click", function() {
+  window.location.href = "http://127.0.0.1:8000/fill";
+});
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+{% load i18n %}
+
+{% load account socialaccount %}
+{% load widget_tweaks %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+<div class="container mx-auto p-y row d-flex justify-content-center align-items-center mt-5">
+
+
+
+{% get_providers as socialaccount_providers %}
+
+
+
+
+<div class="col-lg-6 col-md-10 col-sm-12 mt-5 ">
+  <h1 style="text-align: center;">Sign In</h1>
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  
+
+  <div class="form-outline mb-4">
+    
+   
+    {{ form.login|add_class:"form-control" }}
+    <label class="form-label" for="form2Example1">Username or Email</label>
+  </div>
+
+  <div class="form-outline mb-4">
+    
+ 
+     {{ form.password|add_class:"form-control" }}
+  <label class="form-label" for="form2Example2">Password</label>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <label class="form-check-label" for="form2Example31"> Remember me </label>
+      {{ form.remember|add_class:"form-check-input" }}
+      
+    </div>
+    <div class="col">
+      <a href="{% url 'account_reset_password' %}">Forgot password?</a>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+  </div>
+
+  {% if socialaccount_providers %}
+  
+  <div class="text-center">
+    <p>Not a member? <a href="{% url 'account_signup' %}">Register</a></p>
+    
+
+    
+    <p>Or sign up with:</p>
+    <button type="submit"  class="btn btn-link btn-floating mx-1">
+      
+      <!-- Google Icon Good. But compormise now. -->
+      <i class="fa-brands"> {% include "socialaccount/snippets/provider_list.html" with process="login" %}</i>  
+    
+    
+    
+    </button>
+    
+  </div>
+  {% endif %}
+
+
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+
+</form>
+
+</div>
+
+</div>
+
+
+{% endblock %}
