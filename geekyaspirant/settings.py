@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "version_1",
+    "core",
     "users",
     "blog_posts",
     'widget_tweaks',
@@ -117,8 +117,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_ROOT = "/home/usmanafridi121/gpt-3-website"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "core" / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -166,7 +170,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'accounts/login/'
 
 ## This is to redirect to a particular view function when the rate limit is achieved
-RATELIMIT_VIEW = 'version_1.views.rate_limit_reached'
+RATELIMIT_VIEW = 'core.views.rate_limit_reached'
 
 
 ###### MULTIPLE RATE LIMIT VIEWS CAN BE ACHIEVED BY FOLLOWING ######
