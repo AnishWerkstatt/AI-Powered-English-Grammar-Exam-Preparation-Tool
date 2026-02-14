@@ -1,6 +1,6 @@
-# 🧠 Geeky Aspirant - AI-Powered English Grammar Exam Preparation Tool
+# 🧠 AI-Powered English Grammar Exam Preparation Tool
 
-**Geeky Aspirant** is an AI-powered tool designed for English grammar exam preparation (IELTS, TOEFL, etc.). Built with Django, Bootstrap, and OpenAI GPT-3, it helps learners improve grammar, vocabulary, and comprehension through interactive exercises and NLP-driven feedback.
+This is an AI-powered tool designed for English grammar exam preparation (IELTS, TOEFL, etc.). Built with Django, Bootstrap, and OpenAI GPT-3, it helps learners improve grammar, vocabulary, and comprehension through interactive exercises and NLP-driven feedback.
 
 ## 🚀 Features
 - ✅ **Grammar Check** – AI-powered correction.
@@ -20,7 +20,7 @@
 1. **Clone the Repository**
    ```bash
    git clone <repository-url>
-   cd geeky-aspirant
+   cd <project-folder>
    ```
 
 2. **Install Dependencies**
